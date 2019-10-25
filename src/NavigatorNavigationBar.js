@@ -136,12 +136,22 @@ class NavigatorNavigationBar extends React.Component {
       interpolate = this.props.navigationStyles.Interpolators.RightToLeft;
     }
 
+    // COMPONENT_NAMES.forEach(function (componentName) {
+    //   var component = this._components[componentName].get(this.props.navState.routeStack[index]);
+    //   var props = this._getReusableProps(componentName, index);
+    //   if (component && interpolate[componentName](props.style, amount)) {
+    //     props.pointerEvents = props.style.opacity === 0 ? 'none' : 'box-none';
+    //     component.setNativeProps(props);
+    //   }
+    // }, this);
     COMPONENT_NAMES.forEach(function (componentName) {
       var component = this._components[componentName].get(this.props.navState.routeStack[index]);
       var props = this._getReusableProps(componentName, index);
       if (component && interpolate[componentName](props.style, amount)) {
         props.pointerEvents = props.style.opacity === 0 ? 'none' : 'box-none';
-        component.setNativeProps(props);
+        if (isNaN(props.style.left) == false) {
+          component.setNativeProps(props);
+        }
       }
     }, this);
   };
